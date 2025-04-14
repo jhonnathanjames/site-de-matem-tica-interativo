@@ -64,5 +64,5 @@ pontuacao -= 5;
 }
 
 document.getElementById("pontuacao").innerText = pontuacao;
-}
+}l
 
