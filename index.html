@@ -1,26 +1,85 @@
-<!DOCTYPE html>
+<<!DOCTYPE html>
 <html lang="pt">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Atividades de Matemática</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jogo de Matemática</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #f0f0f0;
+    }
+    #area-jogo {
+      margin-top: 20px;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      display: none;
+    }
+  </style>
 </head>
 <body>
-<h1>Atividades de Matemática</h1>
-<h2>Jogo de Matemática</h2>
-<button onclick="iniciarJogo('desafio')">Modo Desafio</button>
-<button onclick="iniciarJogo('basico')">Modo Básico</button>
+  <h1>Jogo de Matemática</h1>
+  <button onclick="iniciarJogo('basico')">Modo Básico</button>
+  <button onclick="iniciarJogo('desafio')">Modo Desafio</button>
 
-<div id="area-jogo" style="display: none;">
-<p id="pergunta"></p>
-<input type="number" id="resposta" placeholder="Digite sua resposta">
-<button onclick="verificarResposta()">Responder</button>
-<p id="resultado"></p>
-<button onclick="novaPergunta()">Nova Pergunta</button>
-<p>Pontuação: <span id="pontuacao">0</span></p>
-</div>
+  <div id="area-jogo">
+    <p id="pergunta"></p>
+    <input type="number" id="resposta" placeholder="Digite sua resposta">
+    <button onclick="verificarResposta()">Responder</button>
+    <p id="resultado"></p>
+    <button onclick="novaPergunta()">Nova Pergunta</button>
+    <p>Pontuação: <span id="pontuacao">0</span></p>
+  </div>
 
-<script src="js/game.js"></script>
+  <script>
+    let modo = 'basico';
+    let respostaCorreta = 0;
+    let pontuacao = 0;
+
+    function iniciarJogo(selecionado) {
+      modo = selecionado;
+      pontuacao = 0;
+      document.getElementById('pontuacao').textContent = pontuacao;
+      document.getElementById('area-jogo').style.display = 'block';
+      novaPergunta();
+    }
+
+    function novaPergunta() {
+      let n1 = Math.floor(Math.random() * 10 + 1);
+      let n2 = Math.floor(Math.random() * 10 + 1);
+      let operador = '+';
+      
+      if (modo === 'desafio') {
+        const operadores = ['+', '-', '*'];
+        operador = operadores[Math.floor(Math.random() * operadores.length)];
+      }
+
+      switch (operador) {
+        case '+': respostaCorreta = n1 + n2; break;
+        case '-': respostaCorreta = n1 - n2; break;
+        case '*': respostaCorreta = n1 * n2; break;
+      }
+
+      document.getElementById('pergunta').textContent = `Quanto é ${n1} ${operador} ${n2}?`;
+      document.getElementById('resposta').value = '';
+      document.getElementById('resultado').textContent = '';
+    }
+
+    function verificarResposta() {
+      const resposta = parseInt(document.getElementById('resposta').value);
+      const resultado = document.getElementById('resultado');
+
+      if (resposta === respostaCorreta) {
+        resultado.textContent = 'Correto!';
+        pontuacao++;
+      } else {
+        resultado.textContent = `Errado! A resposta certa era ${respostaCorreta}`;
+      }
+
+      document.getElementById('pontuacao').textContent = pontuacao;
+    }
+  </script>
 </body>
 </html>

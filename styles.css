@@ -4,28 +4,70 @@ body {
     background-color: #f4f4f4;
     margin: 0;
     padding: 0;
-    }
-    
-    .container {
+  }
+  
+  .container {
     max-width: 500px;
     margin: 50px auto;
     background: white;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-    
-    button {
+  }
+  
+  button {
     margin: 10px 5px;
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
-    }
-    
-    input {
+    border: none;
+    border-radius: 5px;
+    background-color: #3498db;
+    color: white;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #2980b9;
+  }
+  
+  input {
     padding: 10px;
     font-size: 16px;
     margin-top: 10px;
     width: 80%;
-    }
-    
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  #resultado {
+    margin-top: 10px;
+    font-weight: bold;
+  }
+  
+  #pergunta {
+    font-size: 18px;
+    margin: 20px 0 10px;
+  }
+  Agora, no HTML, você pode aplicar a classe .container ao redor do conteúdo principal. Exemplo:
+  
+  <body>
+    <div class="container">
+      <h1>Jogo de Matemática</h1>
+      <button onclick="iniciarJogo('basico')">Modo Básico</button>
+      <button onclick="iniciarJogo('desafio')">Modo Desafio</button>
+  
+      <div id="area-jogo" style="display: none;">
+        <p id="pergunta"></p>
+        <input type="number" id="resposta" placeholder="Digite sua resposta">
+        <br>
+        <button onclick="verificarResposta()">Responder</button>
+        <p id="resultado"></p>
+        <button onclick="novaPergunta()">Nova Pergunta</button>
+        <p>Pontuação: <span id="pontuacao">0</span></p>
+      </div>
+    </div>
+  </body>
+  
+  
+  
